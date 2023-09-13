@@ -118,6 +118,4 @@ The **bin_encoding** should be a string encoding of the final set of packed bins
 
 ## Submission
 
-You should create a GitHub repository that includes your code. Please make your code as clear and easy to read as possible. 
-
 It would be helpful to include some test cases. I have provided skeleton test code that might be useful.
