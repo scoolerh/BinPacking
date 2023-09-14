@@ -17,7 +17,7 @@ def newproblem():
     newproblem = {'ID': id, 'bins': binEncoding}
     return newproblem
 
-@app.route('/placeitem/<problemID>/<size>')
+@app.route('/placeitem/<problemID>/<size>/')
 def placeitem(problemID, size):
     problemID = int(problemID)
     size = int(size)
@@ -50,10 +50,30 @@ def placeitem(problemID, size):
     binsList[problemID] = final
     return final
 
-@app.route('endproblem/<problemID>/')
+@app.route('/endproblem/<problemID>/')
 def endProblem(problemID):
     problemID = int(problemID)
+    data = {'ID': problemID}
+    if len(binsList[problemID]) == 2:
+        return {'ID': problemID, 'size': 0, 'items': 0, 'count': 0, 'wasted': 0, 'bins': '##'}
+    if binsList[problemID][-1] == 'c':
+        binsList[problemID] = binsList[problemID][:-1]
+    binData = binsList[problemID][2:-2]
+    bins = binData.split("#")
+    totalSize = 0
+    numItems = 0
+    for bin in bins:
+        items = bin.split("!")
+        for item in items:
+            numItems += 1
+            totalSize += int(item)
+    data['size'] = totalSize
+    data['items'] = numItems
+    data['count'] = len(bins)
+    data['wasted'] = data['count'] * 100 - totalSize
+    data['bins'] = binsList[problemID]
     binsList[problemID] += 'c'
+    return json.dumps(data)
 
 
 if __name__ == '__main__': 
