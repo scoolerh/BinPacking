@@ -21,6 +21,8 @@ def newproblem():
 def placeitem(problemID, size):
     problemID = int(problemID)
     size = int(size)
+    if binsList[problemID][-1] == 'c':
+        return "This list is closed. You can no longer add to it."
     problem = binsList[problemID]
     if size > 100 :
         return "Failed to add to bin. Item is sized greater than 100."
@@ -47,6 +49,12 @@ def placeitem(problemID, size):
     final += '' if len(bins) == 0 else '#'
     binsList[problemID] = final
     return final
+
+@app.route('endproblem/<problemID>/')
+def endProblem(problemID):
+    problemID = int(problemID)
+    binsList[problemID] += 'c'
+
 
 if __name__ == '__main__': 
     host = 'localhost'
