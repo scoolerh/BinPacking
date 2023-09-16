@@ -1,16 +1,23 @@
 import requests
 
-#Change to the command that you want to test
-api_command = 'do-stuff'
+# new problem
+api_command = 'newproblem'
 
-#Change to the input you want to test
-api_input = 'banana'
+# test new problem
+print(requests.get('http://localhost:5001/' + api_command + '/').text)
+print(requests.get('http://localhost:5001/' + api_command + '/').text)
 
-#Make sure to use the same port that you used in your flask API
-response = requests.get('http://localhost:5555/'+ api_command +'/' + api_input)
+print(requests.get('http://localhost:5001/placeitem/0/60').text)
+# test that item that doesn't fit goes to new bin
+print(requests.get('http://localhost:5001/placeitem/0/60').text)
+# test that code will retroactively add to old bin
+print(requests.get('http://localhost:5001/placeitem/0/20').text)
+# test that you cannot place object bigger than 100
+print(requests.get('http://localhost:5001/placeitem/0/101').text)
 
-jsonResponse = response.json()
-print(jsonResponse)
+print(requests.get('http://localhost:5001/endproblem/0/').text)
+# test that you cannot add to closed problem
+print(requests.get('http://localhost:5001/placeitem/0/20').text)
 
-print(jsonResponse['stuff'])
+
 
