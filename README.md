@@ -1,4 +1,8 @@
 # BinPacking
+
+Bryce Bernstein and Hannah Scooler
+
+## Instructions 
 You are to code an API that provides a Bin Packing algorithm. It is not important that your Bin Packing algorithm do a good job, only that it operates correctly.
 
 You can find information about the general Bin Packing problem here.
